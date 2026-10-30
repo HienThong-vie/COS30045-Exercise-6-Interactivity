@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Exercise 6 – Interactivity | COS30045</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap"
+    />
+    <link rel="icon" href="img/PowerIcon.png" />
+    <!-- page styles + chart styles -->
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/visualisation.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../demo2/index.html">
+          <img src="img/PowerIcon.png" alt="" width="40" height="40" />
+          <span>Appliance Energy<small>COS30045 Demonstration 2</small></span>
+        </a>
+        <nav class="site-nav" aria-label="Exercises">
+          <ul>
+            <li><a href="../demo2/index.html">Home</a></li>
+            <li>
+              <a href="../dv-03-svg-exercise/index.html">4.1 SVG House</a>
+            </li>
+            <li>
+              <a href="../dv-04-bar-chart-exercise/index.html"
+                >4.3–4.7 Bar Chart</a
+              >
+            </li>
+            <li>
+              <a href="../dv-05-multichart-webpage/index.html">5 Multi-chart</a>
+            </li>
+            <li>
+              <a href="../dv-06-interactivity/index.html" aria-current="page"
+                >6 Interactivity</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="container">
+      <span class="badge">Exercise 6 &middot; Interactivity</span>
+      <h1>Exercise 6: Explore TV energy use</h1>
+      <p class="lead">
+        A histogram with filters (6.1, 6.2) and a scatterplot with a legend and
+        tooltips (6.3, 6.4), built from 4,233 TV models in the January 2026
+        Energy Rating data.
+      </p>
+
+      <!-- 6.1 + 6.2 -->
+      <section class="card" aria-labelledby="hist-title">
+        <h2 id="hist-title">
+          6.1 &amp; 6.2 Three in four TVs use under 600 kWh a year
+        </h2>
+        <p>
+          Filter by screen type and size to see how the distribution of energy
+          use changes. Hover a bar to see its range and count.
+        </p>
+
+        <!-- EXTRA: filters beside the chart -->
+        <div class="hist-layout">
+          <div class="hist-controls">
+            <div class="filter-group">
+              <span class="filter-label" id="screen-label">Screen type</span>
+              <div
+                id="filters_screen"
+                class="controls"
+                role="group"
+                aria-labelledby="screen-label"
+              ></div>
+            </div>
+            <div class="filter-group">
+              <span class="filter-label" id="size-label">Screen size</span>
+              <div
+                id="filters_size"
+                class="controls"
+                role="group"
+                aria-labelledby="size-label"
+              ></div>
+            </div>
+            <label class="check"
+              ><input type="checkbox" id="rescale-count" /> Rescale the count
+              axis to the filtered data</label
+            >
+            <p id="filter-count" class="source" aria-live="polite"></p>
+          </div>
+          <div id="histogram" class="responsive-svg-container"></div>
+        </div>
+        <p class="source">
+          Data: <code>Ex6_TVdata_withStar.csv</code> – Energy Rating TV
+          registrations (Jan 2026). One model above 2,600 kWh stretches the x
+          axis.
+        </p>
+      </section>
+
+      <!-- 6.3 + 6.4 -->
+      <section class="card" aria-labelledby="scatter-title">
+        <h2 id="scatter-title">6.3 &amp; 6.4 More stars, less energy</h2>
+        <p>
+          Each dot is a TV model. Colour shows the screen type; hover a dot to
+          see the brand, model and screen size. The filters above also fade the
+          dots that do not match.
+        </p>
+        <div id="scatterplot" class="responsive-svg-container"></div>
+        <p class="source">
+          Star rating comes from the star column of the data set.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>
+          &copy; 2026 Chung Hien Thong (106212681) &middot; COS30045 Data
+          Visualisation, Swinburne University of Technology.
+        </p>
+      </div>
+    </footer>
+
+    <!-- D3 first, then constants before the files that use them -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="js/load-data.js"></script>
+    <script src="js/shared-constants.js"></script>
+    <script src="js/interactions.js"></script>
+    <script src="js/histogram.js"></script>
+    <script src="js/scatterplot.js"></script>
+  </body>
+</html>

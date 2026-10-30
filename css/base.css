@@ -1,0 +1,291 @@
+/* COS30045 Demonstration 2 – shared stylesheet (shadcn/ui-style look in plain CSS) */
+
+/* ---------- Tokens ---------- */
+:root {
+  --background: #fafafa;
+  --card: #ffffff;
+  --foreground: #09090b;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+  --muted-foreground-strong: #52525b;   /* text on grey (--muted) backgrounds, 4.5:1 */
+  --border: #e4e4e7;
+  --border-strong: #d4d4d8;
+  --primary: #18181b;
+  --primary-foreground: #fafafa;
+  --ring: #a1a1aa;
+
+  --chart-1: #2563eb;        /* bars, main data colour (same as barColor in the JS) */
+  --chart-hover: #1d4ed8;
+  --chart-2: #d97706;        /* highlight */
+
+  --radius: 0.75rem;
+  --radius-sm: 0.5rem;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --max-width: 1100px;
+  --font-sans: "Geist", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--foreground);
+  background: var(--background);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: inherit; }
+
+:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -48px;
+  z-index: 100;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--primary);
+  color: var(--primary-foreground);
+  text-decoration: none;
+}
+.skip-link:focus { top: 12px; }
+
+/* ---------- Header + navigation ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  min-height: 64px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.brand img { width: 32px; height: 32px; }
+.brand small {
+  display: block;
+  font-weight: 400;
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+
+.site-nav ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+}
+
+.site-nav a {
+  display: block;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--muted-foreground);
+  transition: color 0.15s, background-color 0.15s;
+}
+.site-nav a:hover { color: var(--foreground); background: var(--muted); }
+.site-nav a[aria-current="page"] { color: var(--foreground); background: var(--muted); }
+
+/* ---------- Page content ---------- */
+main.container { padding-top: 40px; padding-bottom: 56px; }   /* main.container beats .container */
+
+h1 {
+  margin: 12px 0 8px;
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+h2 {
+  margin: 0 0 4px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+.lead { color: var(--muted-foreground); font-size: 1.0625rem; max-width: 70ch; margin: 0; }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--card);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 24px;
+  margin-top: 24px;
+}
+.card > h2 + p { color: var(--muted-foreground); font-size: 0.9375rem; margin-top: 0; max-width: 75ch; }
+
+.note {
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--chart-1);
+  border-radius: var(--radius-sm);
+  background: var(--card);
+  padding: 12px 16px;
+  font-size: 0.9375rem;
+}
+
+.source { font-size: 0.8125rem; color: var(--muted-foreground); margin-top: 12px; }
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--muted);
+  padding: 0.15em 0.35em;
+  border-radius: 0.3rem;
+}
+
+/* "Beyond the tutorial" list */
+.extras { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 10px; }
+.extras li { position: relative; padding-left: 28px; }
+.extras li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 0.45em;
+  width: 6px;
+  height: 11px;
+  border: solid var(--chart-1);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* ---------- Chart containers (from Exercise 4.3) ---------- */
+.responsive-svg-container {
+  margin: 16px auto 0;
+  width: 100%;
+  max-width: 1200px;
+}
+.responsive-svg-container svg { width: 100%; height: auto; display: block; }
+
+/* axes */
+.tick text {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  fill: var(--muted-foreground);
+  font-variant-numeric: tabular-nums;
+}
+.domain, .tick line { stroke: var(--border-strong); }
+.axis-label { font-family: var(--font-sans); font-size: 13px; font-weight: 500; fill: var(--muted-foreground); }
+
+/* ---------- Footer ---------- */
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 20px 0 28px;
+  font-size: 0.8125rem;
+  color: var(--muted-foreground);
+}
+.site-footer p { margin: 4px 0; }
+
+/* ---------- Buttons (shadcn "outline" button) ---------- */
+.controls { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+
+.filter {
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  min-height: 36px;
+  padding: 6px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--card);
+  color: var(--foreground);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+}
+.filter:hover { background: var(--muted); }
+.filter.active { background: var(--primary); border-color: var(--primary); color: var(--primary-foreground); }   /* set with d3 .classed("active", ...) */
+
+@media (pointer: coarse) {
+  .filter { min-height: 44px; }
+}
+
+/* ---------- Misc ---------- */
+figure { margin: 20px 0; }
+figure img { border: 1px solid var(--border); border-radius: var(--radius-sm); }
+figcaption { margin-top: 8px; }
+
+pre {
+  background: #09090b;
+  color: #f4f4f5;
+  padding: 16px;
+  border-radius: var(--radius-sm);
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+pre code { background: none; padding: 0; font-size: inherit; }
+
+details { margin-top: 16px; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 14px; }
+summary { cursor: pointer; font-weight: 500; font-size: 0.9375rem; }
+details pre { margin-bottom: 4px; }
+
+/* shadcn-style table */
+.table-wrap { overflow-x: auto; margin-top: 16px; border: 1px solid var(--border); border-radius: var(--radius-sm); }
+.shape-table { border-collapse: collapse; width: 100%; font-size: 0.875rem; }
+.shape-table th, .shape-table td { padding: 10px 12px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--border); }
+.shape-table th { font-weight: 500; color: var(--muted-foreground-strong); background: var(--muted); }
+.shape-table td[rowspan] { font-weight: 500; border-right: 1px solid var(--border); }
+.shape-table tbody tr:last-child td { border-bottom: 0; }
+
+@media (max-width: 640px) {
+  main.container { padding-top: 28px; }
+  .header-inner { flex-direction: column; align-items: flex-start; }
+  .card { padding: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

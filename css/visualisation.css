@@ -1,0 +1,72 @@
+/* Exercise 6 – styles for the filters and both charts */
+
+.filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin-top: 16px;
+}
+.filter-label { min-width: 95px; font-size: 0.875rem; font-weight: 500; }
+
+/* filter buttons as a toggle group (shadcn Tabs look) */
+.filter-group .controls {
+  margin-top: 0;
+  gap: 4px;
+  padding: 4px;
+  background: var(--muted);
+  border-radius: var(--radius-sm);
+}
+.filter-group .filter {
+  min-height: 32px;
+  padding: 4px 12px;
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  color: var(--muted-foreground-strong);
+}
+.filter-group .filter:hover { background: transparent; color: var(--foreground); }
+.filter-group .filter.active {
+  background: var(--card);
+  border-color: transparent;
+  color: var(--foreground);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+@media (pointer: coarse) {
+  .filter-group .filter { min-height: 40px; }
+}
+
+.check { display: inline-flex; gap: 8px; align-items: center; margin-top: 16px; font-size: 0.875rem; cursor: pointer; }
+.check input { width: 16px; height: 16px; margin: 0; accent-color: var(--primary); }
+#filter-count { font-variant-numeric: tabular-nums; }
+
+/* histogram */
+#histogram .bar { cursor: help; transition: fill 0.15s; }
+#histogram .bar:hover { fill: var(--chart-hover); }
+
+/* scatterplot */
+#scatterplot circle { cursor: pointer; }
+.legend text { font-size: 13px; dominant-baseline: auto; }
+.tooltip text { font-family: var(--font-sans); }
+
+/* EXTRA: filters in a column beside the histogram */
+.hist-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 24px;
+  align-items: center;
+  margin-top: 16px;
+}
+.hist-layout .responsive-svg-container { margin-top: 0; }
+.hist-controls .filter-group { flex-direction: column; align-items: flex-start; gap: 6px; margin-top: 0; margin-bottom: 16px; }
+.hist-controls .check { margin-top: 0; }
+@media (max-width: 800px) {
+  .hist-layout { grid-template-columns: 1fr; }
+}
+.hist-controls .controls { display: grid; width: 100%; }
+#filters_screen { grid-template-columns: repeat(4, 1fr); }
+#filters_size { grid-template-columns: repeat(3, 1fr); }
+.hist-controls .filter { padding-left: 6px; padding-right: 6px; }
+
+/* EXTRA: empty state when no TV matches the filters */
+.empty-state { font-size: 15px; fill: var(--muted-foreground); }
